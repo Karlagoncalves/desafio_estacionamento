@@ -1,7 +1,7 @@
 ## Sistema de Estacionamento 🚗
 
 
-Este é um projeto desenvolvido como parte do desafio prático proposto para a vaga de estágio no programa Decola Tech, em parceria com Avanade e Dio. O sistema implementa funcionalidades básicas de um estacionamento, permitindo o cadastro, remoção e listagem de veículos.
+Este é um projeto desenvolvido como parte do desafio prático proposto para a vaga de estágio no programa Decola Tech, em parceria com Avanade e Dio. O sistema possue funcionalidades básicas de um estacionamento, permitindo o cadastro, remoção e listagem de veículos.
 
 ---
 ### Funcionalidades 🛠️
