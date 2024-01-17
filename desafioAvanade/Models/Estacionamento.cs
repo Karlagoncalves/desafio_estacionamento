@@ -51,26 +51,30 @@ namespace desafioAvanade.Models
             Console.WriteLine("Digite a placa do veículo para remover:");
             string placa = Console.ReadLine().ToUpper();
 
-            Console.WriteLine($"Deseja remover esta placa {placa}? Responda com Sim ou Não");
+            if (!validacaoPlaca.validarPlaca(placa, out string mensagemErro))
+            {
+                Console.WriteLine($"Placa Inválida. {mensagemErro}");
+                return;
+            }
+
+            Console.WriteLine($"Deseja remover esta placa {placa}? Responda com Sim (s) ou Não (n)");
             string removerPlaca = Console.ReadLine().ToUpper();
 
-            if (removerPlaca == "SIM")
+            if (removerPlaca == "SIM" || removerPlaca == "S")
             {
                 if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
                 {
-                    Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
                     try
                     {
-                        string horas = Console.ReadLine();
-                        int horasEstacionado = int.Parse(horas);
-
-                        decimal valorTotal = 0;
-
-                        valorTotal = precoInicial + (precoPorHora * horasEstacionado);
+                        int horasEstacionado = validarHoras.ObterHorasEstacionado();
+                        
+                        decimal valorTotal = CalcularValorCobrado(horasEstacionado);
 
                         Console.WriteLine($"O veículo {placa} removido. Valor a ser cobrado: {valorTotal:C}");
-                        veiculos.Remove(placa.ToUpper());
+                        
+                        veiculos.Remove(placa.ToUpper());  
+
                     }
                     catch (FormatException)
                     {
@@ -82,9 +86,9 @@ namespace desafioAvanade.Models
                     Console.WriteLine($"Desculpe, esse veículo {placa} não está estacionado aqui. Confira se digitou a placa corretamente");
                 }
             }
-            else
+            else if(removerPlaca != "NAO" && removerPlaca != "N")
             {
-                Console.WriteLine("Digite a placa corretamente");
+                Console.WriteLine("Entrada inválida. Responda com Sim (s) ou Não(n).");
             }
         }
 
@@ -95,14 +99,13 @@ namespace desafioAvanade.Models
                 Console.WriteLine("Os veículos estacionados são:");
                 int totalCarrosEstacionado = 0;
 
-                foreach (string carros in veiculos)
+                foreach (string carro in veiculos)
                 {
-                    Console.WriteLine(carros);
+                    Console.WriteLine(carro);
                     totalCarrosEstacionado++;
                 }
 
                 ExibirQuantidadeVagasDisponiveis();
-
 
             }
             else
@@ -118,11 +121,17 @@ namespace desafioAvanade.Models
 
         private void ExibirQuantidadeVagasDisponiveis()
         {
-            int totalCarrosEstacionado = veiculos.Count;
-            Console.WriteLine($"Estamos com o total de {totalCarrosEstacionado} caros estacionados.");
+            Console.WriteLine($"Estamos com o total de {veiculos.Count} carros estacionados.");
             Console.WriteLine($"Vagas disponíveis: {VagasDisponiveis()}.");
 
         }
+
+        private decimal CalcularValorCobrado(int horasEstacionado)
+        {
+            return precoInicial + (precoPorHora * horasEstacionado);
+
+        }
+
 
     }
 }

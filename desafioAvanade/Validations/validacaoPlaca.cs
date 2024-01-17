@@ -12,8 +12,8 @@ namespace desafioAvanade.Validations
             mensagemErro = null;
 
             placa = placa.Trim().Replace("-", "");
-
-            if (placa.Length != 7 && placa.Length != 8)
+//&& placa.Length != 8
+            if (placa.Length != 7)
             {
                 mensagemErro = "A placa deve conter 7 caracteres.";
                 return false;
