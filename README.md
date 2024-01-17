@@ -24,7 +24,7 @@ Este é um projeto desenvolvido como parte do desafio prático proposto para a v
 1. Abra o terminal no VSCode:
 
 - git clone https://github.com/Karlagoncalves/desafio_estacionamento.git
-- cd desafioAvanade
+- cd desafio_estacionamento/desafioAvanade
 
 2. Execute o programa:
 - dotnet run
